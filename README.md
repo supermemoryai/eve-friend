@@ -54,7 +54,13 @@ npm run build
 npm run deploy               # eve deploy --project eve-friend (needs VERCEL_TOKEN or a logged-in vercel CLI)
 ```
 
-After the first deploy: create a Spectrum webhook for `https://<deployment>/eve/v1/photon`, put its signing secret in `SPECTRUM_WEBHOOK_SECRET` on the Vercel project, and redeploy. Check `https://<deployment>/eve/v1/health`.
+After the first deploy, with the Spectrum project credentials (`-u "$SPECTRUM_PROJECT_ID:$SPECTRUM_PROJECT_SECRET"` against `https://spectrum.photon.codes/projects/$SPECTRUM_PROJECT_ID`):
+
+1. `POST /webhooks/` with `{"webhookUrl":"https://<deployment>/eve/v1/photon"}`. The response's `signingSecret` is shown once; put it in `SPECTRUM_WEBHOOK_SECRET` on the Vercel project and redeploy.
+2. The project uses Photon's shared iMessage line, so each person who may text Juno needs a shared user: `POST /users/` with `{"type":"shared","phoneNumber":"+1..."}`. The response's `assignedPhoneNumber` is the number that person texts, and the number Juno texts from.
+3. Check `https://<deployment>/eve/v1/health`.
+
+The live deployment is https://eve-friend.vercel.app on the `supermemory` Vercel team.
 
 ## Change the persona
 
