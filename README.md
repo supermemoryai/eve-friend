@@ -32,7 +32,7 @@ Eve `1.0.2` with `@supermemory/eve@0.2.0-rc.1` (the `next` tag). The provider RE
 | `SPECTRUM_WEBHOOK_SECRET` | Vercel (and local when tunnelling) | signing secret of the Spectrum webhook pointing at `https://<deployment>/eve/v1/photon` |
 | `FRIEND_IMESSAGE_HANDLES` | local and Vercel | comma-separated phone numbers or emails allowed to talk to Juno |
 | `FRIEND_MODEL` | optional | AI Gateway model id, default `google/gemini-2.5-flash` |
-| `FRIEND_CHECKIN_THREAD_ID` | Vercel, optional | the `imessage:<chat guid>` thread the check-in sends to, printed in the function logs as `eve-friend: accepted message` on the first accepted message; unset means no check-ins |
+| `FRIEND_CHECKIN_THREAD_ID` | Vercel, optional | the iMessage thread the check-in sends to, printed in the function logs as `eve-friend: accepted message` on every accepted message (for a shared line it is `imessage:any;-;<your number>~shared`); unset means no check-ins |
 | `AI_GATEWAY_API_KEY` | local only | model access during `eve dev`; on Vercel the deployment authenticates to the AI Gateway with OIDC |
 
 Copy `.env.example` to `.env.local` for local work. Nothing secret is committed.

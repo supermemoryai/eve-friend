@@ -17,3 +17,12 @@ Next: get VERCEL_TOKEN, AI_GATEWAY_API_KEY, and Dhravya's handle; run the local 
 - Spectrum webhook registered for https://eve-friend.vercel.app/eve/v1/photon (one was created, then deleted and re-created to rotate its secret). Dhravya registered as a shared iMessage user; project profile named Juno.
 
 Next: Dhravya texts the assigned number; confirm the iMessage loop and recall; set FRIEND_CHECKIN_THREAD_ID from the logs; push the repo once it exists.
+
+## 3. Live iMessage loop and check-ins (2026-11-17)
+
+- Dhravya texted the assigned shared number; production logs show the messages accepted from his handle and Supermemory holds the session ("user: Heyy / assistant: heyy! how's the riya visit p..."), so the deployed agent recalled a fact from an earlier (local) session on iMessage.
+- Repo: https://github.com/supermemoryai/eve-friend (created from Dhravya's laptop with his gh; pushed from the build machine).
+- Check-in: `FRIEND_CHECKIN_THREAD_ID` set on Vercel from the logged thread id; Vercel schedule `eve.check-in` is active (cron `0 10,19 * * *`, America/Los_Angeles). A manual `vercel schedules invoke eve.check-in` succeeded and the function started the Photon send path; whether Juno texted or chose `no_reply` is only visible on the phone.
+- Container tag in Supermemory is `eve_agent_memscope1_<hash>` because Eve hashes namespace + scope before the provider sees it; only the `eve_agent` prefix is configurable.
+
+Open: AI Gateway is on the free tier (model is gemini-2.5-flash); 0 memories extracted so far from the short test chats (session documents are searchable and recall works).
